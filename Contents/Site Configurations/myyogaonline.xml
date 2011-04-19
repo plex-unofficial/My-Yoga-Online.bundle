@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site site="http://www\.myyogaonline\.com/videos/."
+    plugin="http://www\.myyogaonline\.com/includes/player/player\.swf"
+    initialState="buffering"
+	version="1.0">
+
+	<!-- crop the window to remove the control bar at the bottom -->
+	<crop x="0" y="0" width="640" height="360" />
+
+	<!-- seekbar is thumb type with black handle -->
+	<seekbar type="thumb">
+		<start x="69" y="373" />
+		<end x="524" y="373" />
+		<played>
+			<color rgb="000000" />
+		</played>
+	</seekbar>
+
+	<!-- buffer state to allow page to load -->
+    <state name="buffering">
+        <event>
+            <condition>
+                <frameLoaded />
+            </condition>
+            <action>
+                <goto state="playing" />
+            </action>
+        </event>
+    </state>
+
+	<!-- the video is playing -->
+    <state name="playing">
+        <event>
+            <condition>
+                <command name="pause"/>
+            </condition>
+            <action>
+				<!-- click the button at the lower left -->
+                <click x="10" y="370"/>
+                <goto state="paused" />
+            </action>
+        </event>
+    </state>
+
+	<!-- pause the video playback -->
+	<state name="paused">
+		<event>
+          <condition>
+            <command name="play"/>
+          </condition>
+          <action>
+			<!-- click the button at the lower left -->
+            <click x="10" y="370"/>
+	  		<goto state="playing" />
+          </action>
+        </event>
+	</state>
+	
+</site>
